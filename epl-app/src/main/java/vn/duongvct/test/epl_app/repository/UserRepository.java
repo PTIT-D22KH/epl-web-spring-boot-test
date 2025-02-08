@@ -12,4 +12,5 @@ import vn.duongvct.test.epl_app.domain.User;
 public interface UserRepository extends JpaRepository<User,Long>{
     boolean existsByEmail(String email);
     User findByEmail(String email);
+    User findByRefreshtokenAndEmail(String refreshToken, String email);
 }
