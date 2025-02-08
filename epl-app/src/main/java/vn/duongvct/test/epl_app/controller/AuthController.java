@@ -27,7 +27,7 @@ public class AuthController {
     private UserService userService;
     private PasswordEncoder passwordEncoder;
     private AuthenticationManagerBuilder authenticationManagerBuilder;
-    private SecurityUtil
+    // private SecurityUtil
 
     public AuthController(UserService userService, PasswordEncoder passwordEncoder, AuthenticationManagerBuilder authenticationManagerBuilder) {
         this.userService = userService;
@@ -58,7 +58,7 @@ public class AuthController {
         //push information if success to securitycontext
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        String jwt = this.u
+        // String jwt = this.u
 
         
     }

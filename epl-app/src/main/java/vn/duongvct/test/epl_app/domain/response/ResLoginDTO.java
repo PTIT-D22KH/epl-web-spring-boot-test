@@ -23,5 +23,14 @@ public class ResLoginDTO {
         
     }
 
+    @Getter
+    @Setter
+    public static class UserInsideToken {
+        private Long id;
+        private String email;
+        private String name;
+        
+    }
+
 
 }
