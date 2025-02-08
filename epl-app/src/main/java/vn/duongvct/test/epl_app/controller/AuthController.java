@@ -4,13 +4,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+
 import jakarta.validation.Valid;
 import vn.duongvct.test.epl_app.domain.User;
 import vn.duongvct.test.epl_app.domain.response.ResCreateUserDTO;
+import vn.duongvct.test.epl_app.domain.response.ResLoginDTO;
 import vn.duongvct.test.epl_app.service.UserService;
 import vn.duongvct.test.epl_app.util.exception.InvalidRequestException;
 
@@ -36,6 +38,9 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.userService.convertUserToResCreateUserDTO(createdUser));
 
     }
+
+    @PostMapping("/auth/login")
+    public ResponseEntity<ResLoginDTO> login( @)
 
 
 

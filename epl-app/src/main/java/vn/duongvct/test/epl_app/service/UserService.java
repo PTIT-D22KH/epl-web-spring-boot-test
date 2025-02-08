@@ -9,4 +9,5 @@ public interface UserService {
     public User handleSaveUser(User user);
 
     public ResCreateUserDTO convertUserToResCreateUserDTO(User user);
+    public User getUserByUsername(String email);
 }

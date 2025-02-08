@@ -2,6 +2,7 @@ package vn.duongvct.test.epl_app.util.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -20,7 +21,8 @@ public class GlobalException {
     }
 
     @ExceptionHandler(value = {
-        InvalidRequestException.class
+        InvalidRequestException.class,
+        UsernameNotFoundException.class
     } )
     public ResponseEntity<RestResponse<Object>> handleInvalidRequestException(InvalidRequestException exception) {
         RestResponse<Object> response = new RestResponse<>();
