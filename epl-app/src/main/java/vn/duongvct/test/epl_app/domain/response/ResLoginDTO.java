@@ -2,7 +2,9 @@ package vn.duongvct.test.epl_app.domain.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
@@ -16,6 +18,8 @@ public class ResLoginDTO {
 
     @Getter
     @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class UserLogin {
         private Long id;
         private String email;

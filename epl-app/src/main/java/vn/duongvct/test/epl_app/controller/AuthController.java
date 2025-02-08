@@ -1,6 +1,9 @@
 package vn.duongvct.test.epl_app.controller;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -19,6 +22,7 @@ import vn.duongvct.test.epl_app.domain.request.RequestLoginDTO;
 import vn.duongvct.test.epl_app.domain.response.ResCreateUserDTO;
 import vn.duongvct.test.epl_app.domain.response.ResLoginDTO;
 import vn.duongvct.test.epl_app.service.UserService;
+import vn.duongvct.test.epl_app.util.SecurityUtil;
 import vn.duongvct.test.epl_app.util.exception.InvalidRequestException;
 
 @RestController
@@ -27,12 +31,16 @@ public class AuthController {
     private UserService userService;
     private PasswordEncoder passwordEncoder;
     private AuthenticationManagerBuilder authenticationManagerBuilder;
-    // private SecurityUtil
+    private SecurityUtil securityUtil;
 
-    public AuthController(UserService userService, PasswordEncoder passwordEncoder, AuthenticationManagerBuilder authenticationManagerBuilder) {
+    @Value("${jwt.refresh-token-validity-in-seconds}")
+    private long refreshTokenExpiration;
+
+    public AuthController(UserService userService, PasswordEncoder passwordEncoder, AuthenticationManagerBuilder authenticationManagerBuilder, SecurityUtil securityUtil) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
+        this.securityUtil = securityUtil;
     }
 
     @PostMapping("/auth/register")
@@ -58,7 +66,36 @@ public class AuthController {
         //push information if success to securitycontext
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        // String jwt = this.u
+        //not pass password
+        ResLoginDTO resLoginDTO = new ResLoginDTO();
+        User currentUser = this.userService.getUserByUsername(requestLoginDTO.getUsername());
+        if (currentUser != null) {
+            ResLoginDTO.UserLogin userLogin = new ResLoginDTO.UserLogin(
+                currentUser.getId(),
+                currentUser.getEmail(),
+                currentUser.getAddress()
+            );
+            resLoginDTO.setUser(userLogin);
+        }
+        String accessToken = this.securityUtil.createAccessToken(requestLoginDTO.getUsername(), resLoginDTO);
+        resLoginDTO.setAccessToken(accessToken);
+
+        String refreshToken = this.securityUtil.createRefreshToken(requestLoginDTO.getUsername(), resLoginDTO);
+
+        this.userService.updateUserToken(requestLoginDTO.getUsername(), refreshToken);
+
+        //set cookies
+        ResponseCookie resCookies = ResponseCookie.from("refresh_token", refreshToken)
+                .httpOnly(true)
+                .secure(true)
+                .path("/")
+                .maxAge(refreshTokenExpiration)
+                // .domain("example.com")
+                .build();
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.SET_COOKIE, resCookies.toString())
+                .body(resLoginDTO);
 
         
     }

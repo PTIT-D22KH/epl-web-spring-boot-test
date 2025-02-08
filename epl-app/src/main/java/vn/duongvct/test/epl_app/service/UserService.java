@@ -10,4 +10,5 @@ public interface UserService {
 
     public ResCreateUserDTO convertUserToResCreateUserDTO(User user);
     public User getUserByUsername(String email);
+    public void updateUserToken(String token, String email);
 }
