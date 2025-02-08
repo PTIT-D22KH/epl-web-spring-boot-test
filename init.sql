@@ -1,0 +1,4 @@
+CREATE USER 'test_user'@'%' IDENTIFIED BY 'superSecretPassword!123';
+GRANT ALL PRIVILEGES ON *.* TO 'test_user'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+CREATE DATABASE epl;
