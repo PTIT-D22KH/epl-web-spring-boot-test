@@ -3,46 +3,55 @@ package vn.duongvct.test.epl_app.domain;
 import java.time.Instant;
 import java.util.List;
 
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import vn.duongvct.test.epl_app.domain.util.FootballPeriod;
 import vn.duongvct.test.epl_app.util.SecurityUtil;
 
 @Entity
-@Table(name = "players")
+@Table(name = "club_player")
 @Getter
 @Setter
-public class Player {
+public class ClubPlayer {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "player_id")
+    private Player player;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "club_id")
+    private Club club;
 
-    private int age;
+    // Using @ElementCollection to store a collection of Periods for a ClubPlayer
+    @ElementCollection
+    @CollectionTable(
+        name = "player_club_periods",
+        joinColumns = @JoinColumn(name="club_player_id")
+    )
+    private List<FootballPeriod> periods;
 
-    @OneToMany(mappedBy = "player", fetch = FetchType.LAZY)
-    private List<PlayerPosition> positions;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
-    private List<ClubPlayer> clubHistory;
-
-    private String nation;
+    private boolean isActive;
     private Instant createdAt;
     private Instant updatedAt;
 
     private String createdBy;
     private String updatedBy;
-
     @PrePersist
     public void handleBeforeCreate() {
         this.createdBy = SecurityUtil.getCurrentUserLogin().isPresent() == true
@@ -60,10 +69,4 @@ public class Player {
         this.updatedAt = Instant.now();
 
     }
-
-
-
-
-
-
 }

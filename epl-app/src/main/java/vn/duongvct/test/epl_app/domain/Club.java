@@ -17,32 +17,25 @@ import lombok.Setter;
 import vn.duongvct.test.epl_app.util.SecurityUtil;
 
 @Entity
-@Table(name = "players")
+@Table(name = "clubs")
 @Getter
 @Setter
-public class Player {
+public class Club {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
-
-
-    private int age;
-
-    @OneToMany(mappedBy = "player", fetch = FetchType.LAZY)
-    private List<PlayerPosition> positions;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
-    private List<ClubPlayer> clubHistory;
-
     private String nation;
+
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "club")
+    private List<ClubPlayer> playerHistory;
     private Instant createdAt;
     private Instant updatedAt;
 
     private String createdBy;
     private String updatedBy;
-
     @PrePersist
     public void handleBeforeCreate() {
         this.createdBy = SecurityUtil.getCurrentUserLogin().isPresent() == true
@@ -60,10 +53,4 @@ public class Player {
         this.updatedAt = Instant.now();
 
     }
-
-
-
-
-
-
 }
