@@ -1,9 +1,12 @@
 package vn.duongvct.test.epl_app.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import vn.duongvct.test.epl_app.domain.User;
 import vn.duongvct.test.epl_app.domain.response.ResCreateUserDTO;
+import vn.duongvct.test.epl_app.domain.response.ResponseUserDTO;
 import vn.duongvct.test.epl_app.repository.UserRepository;
 
 @Service
@@ -53,6 +56,24 @@ public class UserService{
     
     public User getUserByRefreshTokenAndEmail(String refreshToken, String email) {
         return this.userRepository.findByRefreshtokenAndEmail(refreshToken, email);
+    }
+
+    public Optional<User> getUserById(Long id) {
+        return this.userRepository.findById(id);
+    }
+
+    public ResponseUserDTO convertUserToResponseUserDTO(User user) {
+        ResponseUserDTO responseUserDTO = new ResponseUserDTO();
+        responseUserDTO.setId(user.getId());
+        responseUserDTO.setName(user.getName());
+        responseUserDTO.setEmail(user.getEmail());
+        responseUserDTO.setAddress(user.getAddress());
+        responseUserDTO.setAge(user.getAge());
+        responseUserDTO.setCreatedAt(user.getCreatedAt());
+        responseUserDTO.setGender(user.getGender());
+        responseUserDTO.setNation(user.getNation());
+        responseUserDTO.setUpdatedAt(user.getUpdatedAt());
+        return responseUserDTO;
     }
     
     
