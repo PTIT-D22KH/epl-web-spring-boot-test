@@ -26,10 +26,8 @@ public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-
-
+    private String nation;
     private int age;
 
     @OneToMany(mappedBy = "player", fetch = FetchType.LAZY)
@@ -40,7 +38,7 @@ public class Player {
     @JsonIgnore
     private List<ClubPlayer> clubHistory;
 
-    private String nation;
+    
     private Instant createdAt;
     private Instant updatedAt;
 

@@ -5,36 +5,43 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import vn.duongvct.test.epl_app.domain.util.FootballPeriod;
 import vn.duongvct.test.epl_app.util.SecurityUtil;
 
 @Entity
-@Table(name = "coaches")
+@Table(name = "club_coach")
 @Getter
 @Setter
-public class Coach {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class ClubCoach {
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name = "coach_id")
+    private Coach coach;
 
-    private String name;
-    private String nation;
-    private int age;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "club_id")
+    private Club club;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "club")
+    // Using @ElementCollection to store a collection of Periods for a ClubPlayer
+    @ElementCollection
+    @CollectionTable(
+        name = "coach_club_periods",
+        joinColumns = @JoinColumn(name="club_coach_id")
+    )
     @JsonIgnore
-    private List<ClubCoach> clubHistory;
+    private List<FootballPeriod> periods;
 
+    private boolean isActive;
     private Instant createdAt;
     private Instant updatedAt;
 
@@ -57,4 +64,5 @@ public class Coach {
         this.updatedAt = Instant.now();
 
     }
+
 }

@@ -34,6 +34,10 @@ public class Club {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "club")
     @JsonIgnore
     private List<ClubPlayer> playerHistory;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "club")
+    @JsonIgnore
+    private List<ClubCoach> coachHistory;
     private Instant createdAt;
     private Instant updatedAt;
 
