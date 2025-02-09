@@ -3,6 +3,8 @@ package vn.duongvct.test.epl_app.domain;
 import java.time.Instant;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -31,9 +33,11 @@ public class Player {
     private int age;
 
     @OneToMany(mappedBy = "player", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<PlayerPosition> positions;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
+    @JsonIgnore
     private List<ClubPlayer> clubHistory;
 
     private String nation;

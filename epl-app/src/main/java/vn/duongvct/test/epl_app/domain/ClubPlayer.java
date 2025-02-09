@@ -3,6 +3,8 @@ package vn.duongvct.test.epl_app.domain;
 import java.time.Instant;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -44,6 +46,7 @@ public class ClubPlayer {
         name = "player_club_periods",
         joinColumns = @JoinColumn(name="club_player_id")
     )
+    @JsonIgnore
     private List<FootballPeriod> periods;
 
     private boolean isActive;

@@ -3,6 +3,8 @@ package vn.duongvct.test.epl_app.domain;
 import java.time.Instant;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -30,6 +32,7 @@ public class Club {
 
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "club")
+    @JsonIgnore
     private List<ClubPlayer> playerHistory;
     private Instant createdAt;
     private Instant updatedAt;

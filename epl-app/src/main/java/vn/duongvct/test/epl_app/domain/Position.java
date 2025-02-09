@@ -3,6 +3,8 @@ package vn.duongvct.test.epl_app.domain;
 import java.time.Instant;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -32,6 +34,7 @@ public class Position {
     private PositionEnum name;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "position")
+    @JsonIgnore
     private List<PlayerPosition> playerPositions;
 
 
