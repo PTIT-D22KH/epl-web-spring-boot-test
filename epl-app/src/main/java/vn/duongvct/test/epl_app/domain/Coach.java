@@ -31,7 +31,7 @@ public class Coach {
     private String nation;
     private int age;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "club")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "coach")
     @JsonIgnore
     private List<ClubCoach> clubHistory;
 

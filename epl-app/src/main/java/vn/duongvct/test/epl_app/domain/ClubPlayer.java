@@ -28,6 +28,10 @@ import vn.duongvct.test.epl_app.util.SecurityUtil;
 @Setter
 public class ClubPlayer {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "player_id")
     private Player player;
