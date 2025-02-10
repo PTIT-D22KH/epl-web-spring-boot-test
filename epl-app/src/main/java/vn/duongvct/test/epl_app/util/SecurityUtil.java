@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
 
 import com.nimbusds.jose.util.Base64;
 
-import vn.duongvct.test.epl_app.domain.response.ResponseLoginDTO;
+import vn.duongvct.test.epl_app.domain.response.auth.ResponseLoginDTO;
 
 
 

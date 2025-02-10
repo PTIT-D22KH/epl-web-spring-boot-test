@@ -10,12 +10,12 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import vn.duongvct.test.epl_app.domain.User;
-import vn.duongvct.test.epl_app.domain.request.RequestRegisterUserDTO;
-import vn.duongvct.test.epl_app.domain.request.RequestUpdateUserDTO;
-import vn.duongvct.test.epl_app.domain.response.ResponseCreateUserDTO;
-import vn.duongvct.test.epl_app.domain.response.ResponseUpdateUserDTO;
-import vn.duongvct.test.epl_app.domain.response.ResponseUserDTO;
+import vn.duongvct.test.epl_app.domain.request.auth.RequestRegisterUserDTO;
+import vn.duongvct.test.epl_app.domain.request.user.RequestUpdateUserDTO;
 import vn.duongvct.test.epl_app.domain.response.ResultPaginationDTO;
+import vn.duongvct.test.epl_app.domain.response.user.ResponseCreateUserDTO;
+import vn.duongvct.test.epl_app.domain.response.user.ResponseUpdateUserDTO;
+import vn.duongvct.test.epl_app.domain.response.user.ResponseUserDTO;
 import vn.duongvct.test.epl_app.repository.UserRepository;
 
 @Service

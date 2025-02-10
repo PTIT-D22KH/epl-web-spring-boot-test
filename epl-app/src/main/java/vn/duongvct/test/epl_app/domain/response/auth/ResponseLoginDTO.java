@@ -1,4 +1,4 @@
-package vn.duongvct.test.epl_app.domain.response;
+package vn.duongvct.test.epl_app.domain.response.auth;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

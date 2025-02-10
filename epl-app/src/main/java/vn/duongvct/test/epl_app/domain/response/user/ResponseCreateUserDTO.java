@@ -1,4 +1,4 @@
-package vn.duongvct.test.epl_app.domain.response;
+package vn.duongvct.test.epl_app.domain.response.user;
 
 import java.time.Instant;
 

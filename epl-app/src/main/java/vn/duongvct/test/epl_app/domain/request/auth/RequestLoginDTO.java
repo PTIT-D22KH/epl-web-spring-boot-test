@@ -1,4 +1,4 @@
-package vn.duongvct.test.epl_app.domain.request;
+package vn.duongvct.test.epl_app.domain.request.auth;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;

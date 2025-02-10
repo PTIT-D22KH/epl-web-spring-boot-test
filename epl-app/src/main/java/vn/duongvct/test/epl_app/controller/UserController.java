@@ -6,12 +6,12 @@ import com.turkraft.springfilter.boot.Filter;
 
 import jakarta.validation.Valid;
 import vn.duongvct.test.epl_app.domain.User;
-import vn.duongvct.test.epl_app.domain.request.RequestRegisterUserDTO;
-import vn.duongvct.test.epl_app.domain.request.RequestUpdateUserDTO;
-import vn.duongvct.test.epl_app.domain.response.ResponseCreateUserDTO;
-import vn.duongvct.test.epl_app.domain.response.ResponseUpdateUserDTO;
-import vn.duongvct.test.epl_app.domain.response.ResponseUserDTO;
+import vn.duongvct.test.epl_app.domain.request.auth.RequestRegisterUserDTO;
+import vn.duongvct.test.epl_app.domain.request.user.RequestUpdateUserDTO;
 import vn.duongvct.test.epl_app.domain.response.ResultPaginationDTO;
+import vn.duongvct.test.epl_app.domain.response.user.ResponseCreateUserDTO;
+import vn.duongvct.test.epl_app.domain.response.user.ResponseUpdateUserDTO;
+import vn.duongvct.test.epl_app.domain.response.user.ResponseUserDTO;
 import vn.duongvct.test.epl_app.service.UserService;
 import vn.duongvct.test.epl_app.util.annotation.ApiMessage;
 import vn.duongvct.test.epl_app.util.exception.InvalidRequestException;
@@ -47,8 +47,8 @@ public class UserController {
     public ResponseEntity<ResponseCreateUserDTO> createNewUser(@Valid @RequestBody RequestRegisterUserDTO postManUser)
             throws InvalidRequestException {
 
-        boolean isEmailExit = this.userService.isEmailExists(postManUser.getEmail());
-        if (isEmailExit) {
+        boolean isEmailExist = this.userService.isEmailExists(postManUser.getEmail());
+        if (isEmailExist) {
             throw new InvalidRequestException("Email" + postManUser.getEmail() + " đã tồn tại, vui lòng sử dụng email khác");
         }
         // Mã hóa password

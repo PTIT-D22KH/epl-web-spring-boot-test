@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import vn.duongvct.test.epl_app.domain.User;
-import vn.duongvct.test.epl_app.domain.request.RequestLoginDTO;
-import vn.duongvct.test.epl_app.domain.request.RequestRegisterUserDTO;
-import vn.duongvct.test.epl_app.domain.response.ResponseCreateUserDTO;
-import vn.duongvct.test.epl_app.domain.response.ResponseLoginDTO;
+import vn.duongvct.test.epl_app.domain.request.auth.RequestLoginDTO;
+import vn.duongvct.test.epl_app.domain.request.auth.RequestRegisterUserDTO;
+import vn.duongvct.test.epl_app.domain.response.auth.ResponseLoginDTO;
+import vn.duongvct.test.epl_app.domain.response.user.ResponseCreateUserDTO;
 import vn.duongvct.test.epl_app.service.UserService;
 import vn.duongvct.test.epl_app.util.SecurityUtil;
 import vn.duongvct.test.epl_app.util.annotation.ApiMessage;

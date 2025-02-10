@@ -1,4 +1,4 @@
-package vn.duongvct.test.epl_app.domain.request;
+package vn.duongvct.test.epl_app.domain.request.auth;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
