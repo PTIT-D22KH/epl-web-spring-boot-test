@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import vn.duongvct.test.epl_app.domain.User;
 import vn.duongvct.test.epl_app.domain.request.RequestRegisterUserDTO;
+import vn.duongvct.test.epl_app.domain.request.RequestUpdateUserDTO;
 import vn.duongvct.test.epl_app.domain.response.ResponseCreateUserDTO;
 import vn.duongvct.test.epl_app.domain.response.ResponseUpdateUserDTO;
 import vn.duongvct.test.epl_app.domain.response.ResponseUserDTO;
@@ -81,12 +82,9 @@ public class UserService{
         this.userRepository.deleteById(id);
     }
 
-    public User handleUpdateUser(User user) {
-        User currentUser = this.userRepository.findById(user.getId()).get();
-        if (currentUser != null) {
-            currentUser.setName(user.getName());
-        }
-        return this.userRepository.save(currentUser);
+    public User handleUpdateUser(User user, RequestUpdateUserDTO requestUpdateUserDTO) {
+        user.setName(requestUpdateUserDTO.getName());
+        return this.userRepository.save(user);
     }
 
     public ResponseUpdateUserDTO convertUserToResponseUpdateUserDTO(User user) {

@@ -21,6 +21,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
 import vn.duongvct.test.epl_app.domain.User;
 import vn.duongvct.test.epl_app.domain.request.RequestRegisterUserDTO;
+import vn.duongvct.test.epl_app.domain.request.RequestUpdateUserDTO;
 import vn.duongvct.test.epl_app.domain.response.ResponseCreateUserDTO;
 import vn.duongvct.test.epl_app.domain.response.ResponseUpdateUserDTO;
 import vn.duongvct.test.epl_app.domain.response.ResponseUserDTO;
@@ -75,13 +76,13 @@ public class UserController {
 
     @PutMapping("/users")
     @ApiMessage("Update a user")
-    public ResponseEntity<ResponseUpdateUserDTO> updateUser(@Valid @RequestBody User user) throws InvalidRequestException {
-        User editedUser = this.userService.getUserById(user.getId()).get();
-        if (editedUser == null) {
+    public ResponseEntity<ResponseUpdateUserDTO> updateUser(@Valid @RequestBody RequestUpdateUserDTO user) throws InvalidRequestException {
+        Optional<User> editedUser = this.userService.getUserById(user.getId());
+        if (!editedUser.isPresent()) {
             throw new InvalidRequestException("Cannot find user with id = " + user.getId());
         }
-        editedUser = this.userService.handleSaveUser(editedUser);
-        return ResponseEntity.status(HttpStatus.OK).body(this.userService.convertUserToResponseUpdateUserDTO(editedUser));
+        User currentUser = this.userService.handleUpdateUser(editedUser.get(), user);
+        return ResponseEntity.status(HttpStatus.OK).body(this.userService.convertUserToResponseUpdateUserDTO(currentUser));
     }
 
     @GetMapping("/users")

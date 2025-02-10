@@ -50,6 +50,7 @@ public class AuthController {
 
     @PostMapping("/auth/register")
     public ResponseEntity<ResponseCreateUserDTO> register(@Valid @RequestBody RequestRegisterUserDTO requestRegisterUserDTO) throws InvalidRequestException{
+        // System.out.println(requestRegisterUserDTO);
         if (this.userService.isEmailExists(requestRegisterUserDTO.getEmail())) {
             throw new InvalidRequestException("Email " + requestRegisterUserDTO.getEmail() + " is already exists. Please choose another email");
         }
