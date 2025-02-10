@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 import vn.duongvct.test.epl_app.domain.User;
 import vn.duongvct.test.epl_app.domain.request.RequestLoginDTO;
-import vn.duongvct.test.epl_app.domain.response.ResCreateUserDTO;
-import vn.duongvct.test.epl_app.domain.response.ResLoginDTO;
+import vn.duongvct.test.epl_app.domain.response.ResponseCreateUserDTO;
+import vn.duongvct.test.epl_app.domain.response.ResponseLoginDTO;
 import vn.duongvct.test.epl_app.service.UserService;
 import vn.duongvct.test.epl_app.util.SecurityUtil;
 import vn.duongvct.test.epl_app.util.annotation.ApiMessage;
@@ -48,7 +48,7 @@ public class AuthController {
     }
 
     @PostMapping("/auth/register")
-    public ResponseEntity<ResCreateUserDTO> register(@Valid @RequestBody User user) throws InvalidRequestException{
+    public ResponseEntity<ResponseCreateUserDTO> register(@Valid @RequestBody User user) throws InvalidRequestException{
         if (this.userService.isEmailExists(user.getEmail())) {
             throw new InvalidRequestException("Email " + user.getEmail() + " is already exists. Please choose another email");
         }
@@ -60,7 +60,7 @@ public class AuthController {
     }
 
     @PostMapping("/auth/login")
-    public ResponseEntity<ResLoginDTO> login(@Valid @RequestBody RequestLoginDTO requestLoginDTO) {
+    public ResponseEntity<ResponseLoginDTO> login(@Valid @RequestBody RequestLoginDTO requestLoginDTO) {
         //take input(username and password) into security
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(requestLoginDTO.getUsername(), requestLoginDTO.getPassword());
 
@@ -71,13 +71,13 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         //not pass password
-        ResLoginDTO resLoginDTO = new ResLoginDTO();
+        ResponseLoginDTO resLoginDTO = new ResponseLoginDTO();
         User currentUser = this.userService.getUserByUsername(requestLoginDTO.getUsername());
         if (currentUser != null) {
-            ResLoginDTO.UserLogin userLogin = new ResLoginDTO.UserLogin(
+            ResponseLoginDTO.UserLogin userLogin = new ResponseLoginDTO.UserLogin(
                 currentUser.getId(),
                 currentUser.getEmail(),
-                currentUser.getAddress()
+                currentUser.getName()
             );
             resLoginDTO.setUser(userLogin);
         }
@@ -104,13 +104,13 @@ public class AuthController {
     }
     @GetMapping("/auth/account")
     @ApiMessage("fetch account")
-    public ResponseEntity<ResLoginDTO.UserGetAccount> getAccount() {
+    public ResponseEntity<ResponseLoginDTO.UserGetAccount> getAccount() {
 
         String email = SecurityUtil.getCurrentUserLogin().isPresent() ? SecurityUtil.getCurrentUserLogin().get() : "";
         // Lấy user
         User currentUserDB = this.userService.getUserByUsername(email);
-        ResLoginDTO.UserLogin userLogin = new ResLoginDTO.UserLogin();
-        ResLoginDTO.UserGetAccount userGetAccount = new ResLoginDTO.UserGetAccount();
+        ResponseLoginDTO.UserLogin userLogin = new ResponseLoginDTO.UserLogin();
+        ResponseLoginDTO.UserGetAccount userGetAccount = new ResponseLoginDTO.UserGetAccount();
 
         if (currentUserDB != null) {
             userLogin.setId(currentUserDB.getId());
@@ -126,7 +126,7 @@ public class AuthController {
     @GetMapping("/auth/refresh")
     @ApiMessage("Get User by refresh token")
 
-    public ResponseEntity<ResLoginDTO> getRefreshToken(
+    public ResponseEntity<ResponseLoginDTO> getRefreshToken(
             @CookieValue(name = "refresh_token", defaultValue = "abc") String refreshToken) throws InvalidRequestException {
         if (refreshToken.equals("abc")) {
             throw new InvalidRequestException("Bạn không có refresh token ở cookie");
@@ -143,11 +143,11 @@ public class AuthController {
         }
 
         // issue new token/set refresh token as cookies
-        ResLoginDTO res = new ResLoginDTO();
+        ResponseLoginDTO res = new ResponseLoginDTO();
         User currentUserDB = this.userService.getUserByUsername(email);
         if (currentUserDB != null) {
 
-            ResLoginDTO.UserLogin userLogin = new ResLoginDTO.UserLogin(
+            ResponseLoginDTO.UserLogin userLogin = new ResponseLoginDTO.UserLogin(
                     currentUserDB.getId(),
                     currentUserDB.getEmail(),
                     currentUserDB.getName()

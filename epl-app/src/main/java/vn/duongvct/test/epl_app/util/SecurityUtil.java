@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
 
 import com.nimbusds.jose.util.Base64;
 
-import vn.duongvct.test.epl_app.domain.response.ResLoginDTO;
+import vn.duongvct.test.epl_app.domain.response.ResponseLoginDTO;
 
 
 
@@ -49,8 +49,8 @@ public class SecurityUtil {
     private long refreshTokenExpiration;
 
 
-    public String createAccessToken(String email, ResLoginDTO resLoginDTO) {
-        ResLoginDTO.UserInsideToken userInsideToken = new ResLoginDTO.UserInsideToken();
+    public String createAccessToken(String email, ResponseLoginDTO resLoginDTO) {
+        ResponseLoginDTO.UserInsideToken userInsideToken = new ResponseLoginDTO.UserInsideToken();
         userInsideToken.setEmail(resLoginDTO.getUser().getEmail());
         userInsideToken.setId(resLoginDTO.getUser().getId());
         userInsideToken.setName(resLoginDTO.getUser().getName());
@@ -88,11 +88,11 @@ public class SecurityUtil {
     }
 
 
-    public String createRefreshToken(String email, ResLoginDTO dto) {
+    public String createRefreshToken(String email, ResponseLoginDTO dto) {
         Instant now = Instant.now();
         Instant validity = now.plus(this.refreshTokenExpiration, ChronoUnit.SECONDS);
 
-        ResLoginDTO.UserInsideToken userToken = new ResLoginDTO.UserInsideToken();
+        ResponseLoginDTO.UserInsideToken userToken = new ResponseLoginDTO.UserInsideToken();
         userToken.setId(dto.getUser().getId());
         userToken.setEmail(dto.getUser().getEmail());
         userToken.setName(dto.getUser().getName());
