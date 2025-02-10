@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 import vn.duongvct.test.epl_app.domain.User;
 import vn.duongvct.test.epl_app.domain.request.RequestLoginDTO;
+import vn.duongvct.test.epl_app.domain.request.RequestRegisterUserDTO;
 import vn.duongvct.test.epl_app.domain.response.ResponseCreateUserDTO;
 import vn.duongvct.test.epl_app.domain.response.ResponseLoginDTO;
 import vn.duongvct.test.epl_app.service.UserService;
@@ -48,13 +49,13 @@ public class AuthController {
     }
 
     @PostMapping("/auth/register")
-    public ResponseEntity<ResponseCreateUserDTO> register(@Valid @RequestBody User user) throws InvalidRequestException{
-        if (this.userService.isEmailExists(user.getEmail())) {
-            throw new InvalidRequestException("Email " + user.getEmail() + " is already exists. Please choose another email");
+    public ResponseEntity<ResponseCreateUserDTO> register(@Valid @RequestBody RequestRegisterUserDTO requestRegisterUserDTO) throws InvalidRequestException{
+        if (this.userService.isEmailExists(requestRegisterUserDTO.getEmail())) {
+            throw new InvalidRequestException("Email " + requestRegisterUserDTO.getEmail() + " is already exists. Please choose another email");
         }
-        String hashedPassword = this.passwordEncoder.encode(user.getPassword());
-        user.setPassword(hashedPassword);
-        User createdUser = this.userService.handleSaveUser(user);
+        String hashedPassword = this.passwordEncoder.encode(requestRegisterUserDTO.getPassword());
+        requestRegisterUserDTO.setPassword(hashedPassword);
+        User createdUser = this.userService.handleSaveUser(this.userService.convertRequestRegisterDTOtoUser(requestRegisterUserDTO));
         return ResponseEntity.status(HttpStatus.CREATED).body(this.userService.convertUserToResCreateUserDTO(createdUser));
 
     }

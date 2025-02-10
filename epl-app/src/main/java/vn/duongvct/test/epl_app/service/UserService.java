@@ -10,6 +10,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import vn.duongvct.test.epl_app.domain.User;
+import vn.duongvct.test.epl_app.domain.request.RequestRegisterUserDTO;
 import vn.duongvct.test.epl_app.domain.response.ResponseCreateUserDTO;
 import vn.duongvct.test.epl_app.domain.response.ResponseUpdateUserDTO;
 import vn.duongvct.test.epl_app.domain.response.ResponseUserDTO;
@@ -97,7 +98,7 @@ public class UserService{
         responseUpdateUserDTO.setUpdatedBy(user.getUpdatedBy());
         return responseUpdateUserDTO;
     }
-    public ResultPaginationDTO fetchAllUsers(Specification spec, Pageable pageable) {
+    public ResultPaginationDTO fetchAllUsers(Specification<User> spec, Pageable pageable) {
         Page<User> pageUser = this.userRepository.findAll(pageable);
 
         ResultPaginationDTO result = new ResultPaginationDTO();
@@ -117,5 +118,11 @@ public class UserService{
         result.setResult(list);
         return result;
     }
-    
+    public User convertRequestRegisterDTOtoUser(RequestRegisterUserDTO requestRegisterUserDTO) {
+        User user = new User();
+        user.setEmail(requestRegisterUserDTO.getEmail());
+        user.setName(requestRegisterUserDTO.getName());
+        user.setPassword(requestRegisterUserDTO.getPassword());
+        return user;
+    }
 }

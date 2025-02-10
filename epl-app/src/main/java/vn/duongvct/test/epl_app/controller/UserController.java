@@ -20,6 +20,7 @@ import com.turkraft.springfilter.boot.Filter;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
 import vn.duongvct.test.epl_app.domain.User;
+import vn.duongvct.test.epl_app.domain.request.RequestRegisterUserDTO;
 import vn.duongvct.test.epl_app.domain.response.ResponseCreateUserDTO;
 import vn.duongvct.test.epl_app.domain.response.ResponseUpdateUserDTO;
 import vn.duongvct.test.epl_app.domain.response.ResponseUserDTO;
@@ -39,15 +40,15 @@ public class UserController {
     }
     @PostMapping("/users")
     @ApiMessage("Create a new user")
-    public ResponseEntity<ResponseCreateUserDTO> createNewUser(@Valid @RequestBody User user) throws InvalidRequestException {
-        if (this.userService.isEmailExists(user.getEmail())) {
-            throw new InvalidRequestException("Email " + user.getEmail() + " has already exists, please choose another email!");
+    public ResponseEntity<ResponseCreateUserDTO> register(@Valid @RequestBody RequestRegisterUserDTO requestRegisterUserDTO) throws InvalidRequestException{
+        if (this.userService.isEmailExists(requestRegisterUserDTO.getEmail())) {
+            throw new InvalidRequestException("Email " + requestRegisterUserDTO.getEmail() + " is already exists. Please choose another email");
         }
-        String hashedPassword = this.passwordEncoder.encode(user.getPassword());
-        user.setPassword(hashedPassword);
-        User createdUser = this.userService.handleSaveUser(user);
-
+        String hashedPassword = this.passwordEncoder.encode(requestRegisterUserDTO.getPassword());
+        requestRegisterUserDTO.setPassword(hashedPassword);
+        User createdUser = this.userService.handleSaveUser(this.userService.convertRequestRegisterDTOtoUser(requestRegisterUserDTO));
         return ResponseEntity.status(HttpStatus.CREATED).body(this.userService.convertUserToResCreateUserDTO(createdUser));
+
     }
 
     @GetMapping("/users/{id}")
