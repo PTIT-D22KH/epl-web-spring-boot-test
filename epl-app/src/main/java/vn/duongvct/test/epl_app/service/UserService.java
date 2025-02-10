@@ -82,10 +82,16 @@ public class UserService{
         this.userRepository.deleteById(id);
     }
 
-    public User handleUpdateUser(User user, RequestUpdateUserDTO requestUpdateUserDTO) {
-        user.setName(requestUpdateUserDTO.getName());
-        return this.userRepository.save(user);
+    public User handleUpdateUser(User currentUser, RequestUpdateUserDTO postManUser) {
+        currentUser.setName(postManUser.getName());
+        return this.userRepository.save(currentUser);
     }
+    public User handleUpdateUser(User user) {
+        User currentUser = this.userRepository.findById(user.getId()).get();
+        currentUser.setName(user.getName());
+        return this.userRepository.save(currentUser);
+    }
+    
 
     public ResponseUpdateUserDTO convertUserToResponseUpdateUserDTO(User user) {
         ResponseUpdateUserDTO responseUpdateUserDTO = new ResponseUpdateUserDTO();
