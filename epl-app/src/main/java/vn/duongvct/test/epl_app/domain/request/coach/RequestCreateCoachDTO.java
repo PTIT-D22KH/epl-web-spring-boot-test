@@ -1,0 +1,17 @@
+package vn.duongvct.test.epl_app.domain.request.coach;
+
+import java.util.List;
+
+import lombok.Getter;
+import lombok.Setter;
+import vn.duongvct.test.epl_app.constant.GenderEnum;
+import vn.duongvct.test.epl_app.domain.ClubCoach;
+@Getter
+@Setter
+public class RequestCreateCoachDTO {
+    private String name;
+    private String nation;
+    private int age;
+    private GenderEnum gender;
+    private List<ClubCoach> clubHistory;
+}
