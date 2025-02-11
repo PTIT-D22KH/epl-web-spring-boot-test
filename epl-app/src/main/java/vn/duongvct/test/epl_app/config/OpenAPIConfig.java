@@ -59,6 +59,7 @@ public class OpenAPIConfig {
         return new OpenAPI()
                 .info(createApiInfo())
                 .servers(List.of(
+                        createServer("https://glowing-enigma-4jg5q6x7wqr927q59-8080.app.github.dev/", "Server URL in Development environment"),
                         createServer("https://glowing-space-winner-v6g49vg4qrvv2j5j-8080.app.github.dev/", "Test"),
                         createServer("https://crispy-doodle-69r6qgr645vp249rq-8080.app.github.dev/", "Server URL in Development environment"),
                         createServer("http://localhost:8080", "Server URL in Production environment")))

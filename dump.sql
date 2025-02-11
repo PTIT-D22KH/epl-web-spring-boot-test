@@ -3,7 +3,7 @@
 -- Host: localhost    Database: epl
 -- ------------------------------------------------------
 -- Server version	9.2.0
-USE epl;
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -250,7 +250,7 @@ CREATE TABLE `players` (
 
 LOCK TABLES `players` WRITE;
 /*!40000 ALTER TABLE `players` DISABLE KEYS */;
-INSERT INTO `players` VALUES (3,20,'2025-02-11 02:12:04.744666','user@gmail.com','Duong','VN',NULL,NULL,'MALE');
+INSERT INTO `players` VALUES (3,32,'2025-02-11 02:12:04.744666','user@gmail.com','Harry Kane','England','2025-02-11 16:17:24.804532','user@gmail.com','MALE');
 /*!40000 ALTER TABLE `players` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -308,7 +308,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'2025-02-10 11:42:09.986659','anonymousUser','user@gmail.com','Duong Vu','$2a$10$rYF6EpVCPHMUtAszYvOIjOLP3I7UP5So/yQT10LBqtOmNy.eaHqrC','eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsImV4cCI6MTc0Nzg3OTQ2NCwiaWF0IjoxNzM5MjM5NDY0LCJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6InVzZXJAZ21haWwuY29tIiwibmFtZSI6IkR1b25nIFZ1In19.v-Hzp3XwdUwkp1QKHJij0f-Ffotxp3WS3aGnVMtg64Z39mbYcyvM6T8yYrJwUtuIU0NCzkrcsfD6vP-Uqjn6ww','2025-02-11 02:04:24.670817','user@gmail.com'),(2,'2025-02-10 11:43:34.232349','user@gmail.com','duong1@gmail.com','Duong Vu Cong Tuan','$2a$10$nndwde4hUiZZRL2LXYydAuhu7qmDbgZ/2RhB.jTIwffWYh8vbkOH6',NULL,'2025-02-10 11:45:22.297168','user@gmail.com'),(4,'2025-02-10 12:08:15.245004','user@gmail.com','duong2@gmail.com','Duong Vu','$2a$10$IOs8uw8DRu/uvo9/l5fo7.6mQ9JCN8UsNf3gF8lEIR7h9UOTMzOpS',NULL,NULL,NULL),(5,'2025-02-10 12:08:48.696132','user@gmail.com','duong3@gmail.com','Duong Vu','$2a$10$c6y3DtCVl4UdRH9TPRxVNuimcRLbHF/n867N4njh9MbJUbo8U3e6.',NULL,'2025-02-10 12:10:17.710823','duong3@gmail.com'),(6,'2025-02-10 15:39:21.806516','user@gmail.com','duong4@gmail.com','Duong Vu','$2a$10$vV4p50CA7ld2p0o7LhdQFub63qriQiWoQo0zbM25WAwRe/dBaCKh.',NULL,NULL,NULL);
+INSERT INTO `users` VALUES (1,'2025-02-10 11:42:09.986659','anonymousUser','user@gmail.com','Duong Vu','$2a$10$rYF6EpVCPHMUtAszYvOIjOLP3I7UP5So/yQT10LBqtOmNy.eaHqrC','eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsImV4cCI6MTc0NzkzMDU5MSwiaWF0IjoxNzM5MjkwNTkxLCJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6InVzZXJAZ21haWwuY29tIiwibmFtZSI6IkR1b25nIFZ1In19.q2FVZoRf8uQJPK0oI4DZI89NDAzNItn1Lu0GRDdk2PgQKLSoOVTfV2H5Uxedl5qm00MRXI8pJI9YAX9sgnLdTw','2025-02-11 16:16:31.431068','user@gmail.com'),(2,'2025-02-10 11:43:34.232349','user@gmail.com','duong1@gmail.com','Duong Vu Cong Tuan','$2a$10$nndwde4hUiZZRL2LXYydAuhu7qmDbgZ/2RhB.jTIwffWYh8vbkOH6',NULL,'2025-02-10 11:45:22.297168','user@gmail.com'),(4,'2025-02-10 12:08:15.245004','user@gmail.com','duong2@gmail.com','Duong Vu','$2a$10$IOs8uw8DRu/uvo9/l5fo7.6mQ9JCN8UsNf3gF8lEIR7h9UOTMzOpS',NULL,NULL,NULL),(5,'2025-02-10 12:08:48.696132','user@gmail.com','duong3@gmail.com','Duong Vu','$2a$10$c6y3DtCVl4UdRH9TPRxVNuimcRLbHF/n867N4njh9MbJUbo8U3e6.',NULL,'2025-02-10 12:10:17.710823','duong3@gmail.com'),(6,'2025-02-10 15:39:21.806516','user@gmail.com','duong4@gmail.com','Duong Vu','$2a$10$vV4p50CA7ld2p0o7LhdQFub63qriQiWoQo0zbM25WAwRe/dBaCKh.',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -321,4 +321,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-02-11  2:25:08
+-- Dump completed on 2025-02-11 16:18:29
