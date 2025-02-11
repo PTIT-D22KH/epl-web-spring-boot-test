@@ -35,7 +35,7 @@ public class ClubService {
         clubDTO.setId(club.getId());
         clubDTO.setName(club.getName());
         clubDTO.setNation(club.getNation());
-        clubDTO.setUpdatedAt(club.getUpdatedAt());
+        clubDTO.setCreatedAt(club.getCreatedAt());
         return clubDTO;
     }
 }

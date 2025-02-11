@@ -11,6 +11,6 @@ public class ResponseCreateClubDTO {
     private Long id;
     private String name;
     private String nation;
-    private Instant updatedAt;
+    private Instant createdAt;
 
 }
