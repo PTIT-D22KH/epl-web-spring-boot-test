@@ -151,6 +151,7 @@ CREATE TABLE `coaches` (
   `nation` varchar(255) DEFAULT NULL,
   `updated_at` datetime(6) DEFAULT NULL,
   `updated_by` varchar(255) DEFAULT NULL,
+  `gender` enum('FEMALE','MALE','OTHER') DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -238,8 +239,9 @@ CREATE TABLE `players` (
   `nation` varchar(255) DEFAULT NULL,
   `updated_at` datetime(6) DEFAULT NULL,
   `updated_by` varchar(255) DEFAULT NULL,
+  `gender` enum('FEMALE','MALE','OTHER') DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -248,6 +250,7 @@ CREATE TABLE `players` (
 
 LOCK TABLES `players` WRITE;
 /*!40000 ALTER TABLE `players` DISABLE KEYS */;
+INSERT INTO `players` VALUES (3,20,'2025-02-11 02:12:04.744666','user@gmail.com','Duong','VN',NULL,NULL,'MALE');
 /*!40000 ALTER TABLE `players` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -287,20 +290,16 @@ DROP TABLE IF EXISTS `users`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `address` varchar(255) DEFAULT NULL,
-  `age` int NOT NULL,
   `created_at` datetime(6) DEFAULT NULL,
   `created_by` varchar(255) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
-  `gender` enum('FEMALE','MALE','OTHER') DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `nation` varchar(255) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `refreshtoken` mediumtext,
   `updated_at` datetime(6) DEFAULT NULL,
   `updated_by` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -309,7 +308,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'HN',20,'2025-02-08 16:36:51.230584','anonymousUser','user@gmail.com','MALE','Duong Vu','VN','$2a$10$llrntOX1ZAowsMohOE2cMeKssEKk4hIU3xc7ZbuIRVh8UoF0Bkigy','eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsImV4cCI6MTc0NzY3MzA0NywiaWF0IjoxNzM5MDMzMDQ3LCJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6InVzZXJAZ21haWwuY29tIiwibmFtZSI6IkhOIn19.mYMRtsZgQG_HVqPbGa9xeM7apfAEYOOBfUavR4sS0fiO1U0SbvNOfWBB8uijbhIFM-1_DoYVrMWWx9xNpf1sYA','2025-02-08 16:44:07.743699','user@gmail.com'),(2,'HN',20,'2025-02-08 16:38:57.952682','user@gmail.com','duong@gmail.com','MALE','Duong Vu','VN','$2a$10$zXgSGwcrJcwKrsi/OWD6WeZtaChusBiGmu65u35NYu5G.xSBBff3O','eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkdW9uZ0BnbWFpbC5jb20iLCJleHAiOjE3NDc2NzMwMzMsImlhdCI6MTczOTAzMzAzMywidXNlciI6eyJpZCI6MiwiZW1haWwiOiJkdW9uZ0BnbWFpbC5jb20iLCJuYW1lIjoiSE4ifX0.xdNAzQS5AlL5Cz3u95pJaoGs7CSPjLKFir8HcX37Evd9Ppil5z4z_BKtzha9QWz6Q3frrh2CX2e-ajVjE_F0Ug','2025-02-08 16:43:53.043978','duong@gmail.com'),(3,'HN',20,'2025-02-08 16:40:14.509386','user@gmail.com','duong1@gmail.com','MALE','Duong Vu','VN','$2a$10$lmE6EbS6Fl6bMdIEmFbHr.Hdzk8SQqQTU8nXB50fWSdNydHF85Bbm','eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkdW9uZzFAZ21haWwuY29tIiwiZXhwIjoxNzQ3NjczMDIyLCJpYXQiOjE3MzkwMzMwMjIsInVzZXIiOnsiaWQiOjMsImVtYWlsIjoiZHVvbmcxQGdtYWlsLmNvbSIsIm5hbWUiOiJITiJ9fQ.TWAYtv40V-NbuziOTf9eVggvh_hCO_LWVcuAbqT47MHFENbWfwXsIkkeFzKUe_y7zLqvtsKqP2nVqDITJl8_WQ','2025-02-08 16:43:42.677272','duong1@gmail.com');
+INSERT INTO `users` VALUES (1,'2025-02-10 11:42:09.986659','anonymousUser','user@gmail.com','Duong Vu','$2a$10$rYF6EpVCPHMUtAszYvOIjOLP3I7UP5So/yQT10LBqtOmNy.eaHqrC','eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsImV4cCI6MTc0Nzg3OTQ2NCwiaWF0IjoxNzM5MjM5NDY0LCJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6InVzZXJAZ21haWwuY29tIiwibmFtZSI6IkR1b25nIFZ1In19.v-Hzp3XwdUwkp1QKHJij0f-Ffotxp3WS3aGnVMtg64Z39mbYcyvM6T8yYrJwUtuIU0NCzkrcsfD6vP-Uqjn6ww','2025-02-11 02:04:24.670817','user@gmail.com'),(2,'2025-02-10 11:43:34.232349','user@gmail.com','duong1@gmail.com','Duong Vu Cong Tuan','$2a$10$nndwde4hUiZZRL2LXYydAuhu7qmDbgZ/2RhB.jTIwffWYh8vbkOH6',NULL,'2025-02-10 11:45:22.297168','user@gmail.com'),(4,'2025-02-10 12:08:15.245004','user@gmail.com','duong2@gmail.com','Duong Vu','$2a$10$IOs8uw8DRu/uvo9/l5fo7.6mQ9JCN8UsNf3gF8lEIR7h9UOTMzOpS',NULL,NULL,NULL),(5,'2025-02-10 12:08:48.696132','user@gmail.com','duong3@gmail.com','Duong Vu','$2a$10$c6y3DtCVl4UdRH9TPRxVNuimcRLbHF/n867N4njh9MbJUbo8U3e6.',NULL,'2025-02-10 12:10:17.710823','duong3@gmail.com'),(6,'2025-02-10 15:39:21.806516','user@gmail.com','duong4@gmail.com','Duong Vu','$2a$10$vV4p50CA7ld2p0o7LhdQFub63qriQiWoQo0zbM25WAwRe/dBaCKh.',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -322,4 +321,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-02-09 14:52:48
+-- Dump completed on 2025-02-11  2:25:08
