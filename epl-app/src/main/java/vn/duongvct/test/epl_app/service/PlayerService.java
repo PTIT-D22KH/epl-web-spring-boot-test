@@ -97,12 +97,17 @@ public class PlayerService {
         result.setResult(list);
         return result;
     }
-    public void handleDeleteUser(Long id) {
-        //delete all club related
-        //TO-DO
+    public void handleDeletePlayer(Long id) {
+        Optional<Player> player = this.playerRepository.findById(id);
+        if (player.isPresent()) {
+            Player deletedPlayer = player.get();
+            //delete all club related
+            //TO-DO
 
-        //delete all player positions
-        //TO-DO
+            //delete all player positions
+            //TO-DO
+        }
+        
 
         this.playerRepository.deleteById(id);
     }

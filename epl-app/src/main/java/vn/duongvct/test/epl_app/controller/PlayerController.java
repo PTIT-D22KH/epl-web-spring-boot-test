@@ -77,7 +77,7 @@ public class PlayerController {
     @DeleteMapping("/players/{id}")
     @ApiMessage("Delete a player")
     public ResponseEntity<Void> deleteAPlayer(@PathVariable Long id) {
-        this.playerService.handleDeleteUser(id);
+        this.playerService.handleDeletePlayer(id);
         return ResponseEntity.ok(null);
     }
 

@@ -1,5 +1,7 @@
 package vn.duongvct.test.epl_app.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import vn.duongvct.test.epl_app.domain.Club;
@@ -37,5 +39,8 @@ public class ClubService {
         clubDTO.setNation(club.getNation());
         clubDTO.setCreatedAt(club.getCreatedAt());
         return clubDTO;
+    }
+    public Optional<Club> getClubById(Long id) {
+        return this.clubRepository.findById(id);
     }
 }
