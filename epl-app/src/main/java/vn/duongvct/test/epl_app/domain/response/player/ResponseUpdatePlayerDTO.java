@@ -6,7 +6,7 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import vn.duongvct.test.epl_app.constant.GenderEnum;
-import vn.duongvct.test.epl_app.domain.request.player.RequestClubHistoryInPlayerDTO;
+import vn.duongvct.test.epl_app.domain.request.player.RequestClubPlayerInPlayerDTO;
 import vn.duongvct.test.epl_app.domain.request.player.RequestPlayerPositionInPlayerDTO;
 
 @Getter

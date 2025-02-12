@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class RequestClubHistoryInPlayerDTO {
+public class RequestClubPlayerInPlayerDTO {
     private Long id;
 }

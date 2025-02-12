@@ -15,5 +15,5 @@ public class RequestUpdatePlayerDTO {
     private int age;
     private GenderEnum gender;
     private List<RequestPlayerPositionInPlayerDTO> positions;
-    private List<RequestClubHistoryInPlayerDTO> clubHistory;
+    private List<RequestClubPlayerInPlayerDTO> clubHistory;
 }
