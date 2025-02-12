@@ -18,16 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.turkraft.springfilter.boot.Filter;
 
-import jakarta.validation.Valid;
 import vn.duongvct.test.epl_app.domain.Club;
-import vn.duongvct.test.epl_app.domain.Player;
 import vn.duongvct.test.epl_app.domain.request.club.RequestCreateClubDTO;
 import vn.duongvct.test.epl_app.domain.request.club.RequestUpdateClubDTO;
-import vn.duongvct.test.epl_app.domain.request.player.RequestUpdatePlayerDTO;
 import vn.duongvct.test.epl_app.domain.response.ResultPaginationDTO;
 import vn.duongvct.test.epl_app.domain.response.club.ResponseCreateClubDTO;
 import vn.duongvct.test.epl_app.domain.response.club.ResponseUpdateClubDTO;
-import vn.duongvct.test.epl_app.domain.response.player.ResponseUpdatePlayerDTO;
 import vn.duongvct.test.epl_app.service.ClubService;
 import vn.duongvct.test.epl_app.util.annotation.ApiMessage;
 import vn.duongvct.test.epl_app.util.exception.InvalidRequestException;
@@ -52,33 +48,33 @@ public class ClubController {
         if (!club.isPresent()) {
             throw new InvalidRequestException("Club with id = " + clubDTO.getId() + " not found.");
         }
-        Club updatedClub = this.clubService.handleUpdatePlayer(club.get(), clubDTO);
-        return ResponseEntity.ok().body(this.clubService.(updatedClub));
+        Club updatedClub = this.clubService.handleUpdateClub(club.get(), clubDTO);
+        return ResponseEntity.ok().body(this.clubService.convertClubToResponseUpdateClub(updatedClub));
     }
-    // @GetMapping("/players/{id}")
-    // @ApiMessage("Fetch a player")
-    // public ResponseEntity<Player> fetchAPlayer(@PathVariable Long id) throws InvalidRequestException {
-    //     Optional<Player> player = this.playerService.getPlayerById(id);
-    //     if (!player.isPresent()) {
-    //         throw new InvalidRequestException("Player with id = " + id + " not found.");
-    //     }
-    //     return ResponseEntity.ok(player.get());
-    // }
+    @GetMapping("/clubs/{id}")
+    @ApiMessage("Fetch a club")
+    public ResponseEntity<Club> fetchAClub(@PathVariable Long id) throws InvalidRequestException {
+        Optional<Club> club = this.clubService.getClubById(id);
+        if (!club.isPresent()) {
+            throw new InvalidRequestException("Club with id = " + id + " not found.");
+        }
+        return ResponseEntity.ok(club.get());
+    }
 
-    // @GetMapping("/players")
-    // @ApiMessage("Fetch all players")
-    // public ResponseEntity<ResultPaginationDTO> fetchAllPlayers(
-    //     @Filter Specification<Player> spec,
-    //     Pageable pageable
-    // ) {
-    //     return ResponseEntity.ok(this.playerService.fetchAllPlayers(spec, pageable));
-    // }
+    @GetMapping("/clubs")
+    @ApiMessage("Fetch all clubs")
+    public ResponseEntity<ResultPaginationDTO> fetchAllClubs(
+        @Filter Specification<Club> spec,
+        Pageable pageable
+    ) {
+        return ResponseEntity.ok(this.clubService.fetchAllClubs(spec, pageable));
+    }
 
-    // @DeleteMapping("/players/{id}")
-    // @ApiMessage("Delete a player")
-    // public ResponseEntity<Void> deleteAPlayer(@PathVariable Long id) {
-    //     this.playerService.handleDeletePlayer(id);
-    //     return ResponseEntity.ok(null);
-    // }
+    @DeleteMapping("/clubs/{id}")
+    @ApiMessage("Delete a player")
+    public ResponseEntity<Void> deleteAPlayer(@PathVariable Long id) {
+        this.clubService.handleDeleteClub(id);
+        return ResponseEntity.ok(null);
+    }
 
 }
